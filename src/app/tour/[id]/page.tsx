@@ -1,35 +1,31 @@
 "use client";
 
-import { useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
+const TourDetailPage = () => {
+  // useEffect(() => {
+  //   // Mapbox initialization logic can go here if needed
+  // }, []);
 
-const TourDetailPage = ({ tour, user }) => {
-  useEffect(() => {
-    // Mapbox initialization logic can go here if needed
-  }, []);
-
-  const renderOverviewBox = (label, text, icon) => (
-    <div>
-      <svg width="24" height="24">
-        <use xlinkHref={`/img/icons.svg#icon-${icon}`} />
-      </svg>
-      <span>{label}</span>
-      <span>{text}</span>
-    </div>
-  );
+  // const renderOverviewBox = (label, text, icon) => (
+  //   <div>
+  //     <svg width="24" height="24">
+  //       <use xlinkHref={`/img/icons.svg#icon-${icon}`} />
+  //     </svg>
+  //     <span>{label}</span>
+  //     <span>{text}</span>
+  //   </div>
+  // );
 
   return (
     <div>
-      <section>
+      {/* <section>
         <div>
           <div>&nbsp;</div>
-          <Image
+           <Image
             src={`/img/tours/${tour.imageCover}`}
             alt={tour.name}
             width={1000}
             height={600}
-          />
+          /> 
         </div>
 
         <div>
@@ -120,7 +116,7 @@ const TourDetailPage = ({ tour, user }) => {
         <div>
           {tour.reviews.map((review) => (
             <ReviewCard key={review._id} review={review} />
-          ))}
+          ))} 
         </div>
       </section>
 
@@ -158,7 +154,7 @@ const TourDetailPage = ({ tour, user }) => {
             )}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

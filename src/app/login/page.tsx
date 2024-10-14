@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import backgroundImage from "../../../assets/login-signup.jpg";
+
 import { TextField, Button } from "@mui/material";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ const LoginPage = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={backgroundImage}
+          src="/assets/login-signup.jpg"
           alt="Login Background"
           layout="fill"
           objectFit="cover"
@@ -83,7 +83,7 @@ const LoginPage = () => {
             Login
           </Button>
           <div className="flex text-xl">
-            <p>Don't have an account?</p>
+            <p>Do not have an account?</p>
             <Link href="/register" className="ml-2 text-blue-500 underline">
               Register
             </Link>

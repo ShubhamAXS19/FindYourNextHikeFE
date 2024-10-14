@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
-import { useRecoilValue } from "recoil";
-import { tourAtom } from "./Atoms/tourAtom";
+// import Link from "next/link";
+// import Image from "next/image";
 
-const TourCard = ({ tour }) => {
+{
+  /*
+const TourCard = () => {
   return (
     <div>
       <div>
@@ -59,23 +59,25 @@ const TourCard = ({ tour }) => {
         <p>
           <span>{tour.ratingsAverage}</span> rating ({tour.ratingsQuantity})
         </p>
-        {/* Correct Link component usage without nested <a> */}
+        {/* Correct Link component usage without nested <a> 
         <Link href={`/tour/${tour.slug}`}>Details</Link>
       </div>
     </div>
   );
-};
+}; 
+*/
+}
 
 const TourCardContainer = () => {
-  const tours = useRecoilValue(tourAtom);
+  // const tours = useRecoilValue(tourAtom);
 
   return (
     <main>
-      <div>
+      {/* <div>
         {tours.data.map((tour) => (
           <TourCard key={tour._id} tour={tour} />
         ))}
-      </div>
+      </div> */}
     </main>
   );
 };

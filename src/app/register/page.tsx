@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import backgroundImage from "../../../assets/login-signup.jpg";
+
 import { TextField, Button } from "@mui/material";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ const RegisterPage = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={backgroundImage}
+          src="/assets/login-signup.jpg"
           alt="Register Background"
           layout="fill"
           objectFit="cover"
@@ -33,12 +33,6 @@ const RegisterPage = () => {
             variant="outlined"
             fullWidth
             required
-            InputProps={{
-              style: { color: "white" },
-            }}
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
             sx={{
               backgroundColor: "rgba(255, 255, 255, 0.1)",
               borderRadius: 1,

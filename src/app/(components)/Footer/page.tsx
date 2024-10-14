@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image"; // Import Image from Next.js
-import backgroundImage from "../../../../assets/northern-lights.avif"; // Adjust the path to your image
 import Link from "next/link"; // Import Link from Next.js
 import { ArrowRightAlt } from "@mui/icons-material"; // Import ArrowRightAlt icon from Material UI
 
@@ -11,7 +10,7 @@ export default function HomePage() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={backgroundImage}
+          src="/assets/northern-lights.avif"
           alt="Landing Background"
           layout="fill" // Use fill layout to cover the parent
           objectFit="cover" // Ensure the image covers the area

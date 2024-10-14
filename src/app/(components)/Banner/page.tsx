@@ -2,8 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import backgroundImage from "../../../../assets/northern-lights.avif";
-// import backgroundImage from "../../../../assets/landing.jpg";
 
 const LandingPage = () => {
   return (
@@ -11,7 +9,7 @@ const LandingPage = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={backgroundImage}
+          src="/assets/northern-lights.avif"
           alt="Landing Background"
           layout="fill"
           objectFit="cover"
@@ -32,7 +30,7 @@ const LandingPage = () => {
         </p>
 
         {/* Buttons */}
-        <div className="mt-8 flex space-x-4">
+        {/* <div className="mt-8 flex space-x-4">
           <a
             href="#"
             className="bg-white text-black py-3 px-6 rounded-lg font-semibold flex items-center shadow-lg hover:bg-gray-100 transition-all duration-300"
@@ -59,7 +57,7 @@ const LandingPage = () => {
           >
             Explore More
           </a>
-        </div>
+        </div> */}
       </div>
       {/* Social Media Links */}
       <div className="absolute bottom-6 right-6 flex flex-col space-y-4 z-10">

@@ -1,9 +1,5 @@
 "use client";
 import React from "react";
-import BanffKayaking from "../../../../assets/banff-kayaking.mp4";
-import SnowyMount from "../../../../assets/snowy-mountain.mp4";
-// import IcelandVol from "../../../../assets/iceland-volcano.mp4";
-import Antartica from "../../../../assets/antarctica.webm";
 
 const Page = () => {
   return (
@@ -29,7 +25,7 @@ const Page = () => {
             {/* Background Video */}
             <div className="absolute inset-0 z-0 rounded-xl overflow-hidden">
               <video
-                src={BanffKayaking}
+                src="/assets/banff-kayaking.mp4"
                 autoPlay
                 loop
                 muted
@@ -60,7 +56,7 @@ const Page = () => {
             {/* Background Video */}
             <div className="absolute inset-0 z-0 rounded-xl overflow-hidden">
               <video
-                src={SnowyMount}
+                src="/assets/snowy-mountain.mp4"
                 autoPlay
                 loop
                 muted
@@ -87,7 +83,7 @@ const Page = () => {
             {/* Background Video */}
             <div className="absolute inset-0 z-0 rounded-xl overflow-hidden">
               <video
-                src={Antartica}
+                src="/assets/antarctica.mp4"
                 autoPlay
                 loop
                 muted

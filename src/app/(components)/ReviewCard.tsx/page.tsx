@@ -1,9 +1,7 @@
-import Image from "next/image";
-
-const ReviewCard = ({ review }) => {
+const ReviewCard = () => {
   return (
     <div>
-      <div>
+      {/* <div>
         <Image
           src={`/img/users/${review.user.photo}`}
           alt={`${review.user.name}`}
@@ -24,7 +22,7 @@ const ReviewCard = ({ review }) => {
             <use xlinkHref="/img/icons.svg#icon-star" />
           </svg>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -56,7 +56,7 @@ export default function ActivityCarousel() {
                   <Image
                     src={activity.imageSrc}
                     alt={activity.name}
-                    className="rounded-3xl object-cover"
+                    className="rounded-3xl object-cover "
                     fill
                   />
                 </div>

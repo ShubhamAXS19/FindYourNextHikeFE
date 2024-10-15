@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -10,180 +10,160 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import ExploreIcon from "@mui/icons-material/Explore"; // Import an icon for the Explore button
+import ExploreIcon from "@mui/icons-material/Explore";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const [navBackground, setNavBackground] = useState(false);
-  const [isDropdownVisible, setDropdownVisible] = useState(false); // State to manage dropdown visibility
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(
     null
-  ); // Timeout state
+  );
   const isLoggedIn = true;
   const router = useRouter();
 
-  // Function to handle scroll event
   const handleScroll = () => {
     if (window.scrollY > 100) {
-      setNavBackground(true); // Change background when scrolled 100px
+      setNavBackground(true);
     } else {
-      setNavBackground(false); // Remove background when at the top
+      setNavBackground(false);
     }
   };
 
-  // UseEffect to listen for scroll event
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Cleanup
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Handle redirect to different pages
   const handleRedirect = (path: string) => {
     router.push(path);
   };
 
-  // Show dropdown
   const showDropdown = () => {
-    if (dropdownTimeout) clearTimeout(dropdownTimeout); // Clear any existing timeout to prevent hiding
+    if (dropdownTimeout) clearTimeout(dropdownTimeout);
     setDropdownVisible(true);
   };
 
-  // Hide dropdown with a delay
   const hideDropdown = () => {
     const timeout = setTimeout(() => {
       setDropdownVisible(false);
-    }, 200); // Add delay of 200ms before hiding dropdown
+    }, 200);
     setDropdownTimeout(timeout);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
   };
 
   return (
     <AppBar
       position="fixed"
-      sx={{
-        backgroundColor: navBackground ? "rgba(0, 0, 0, 0.8)" : "transparent",
-        backdropFilter: navBackground ? "blur(10px)" : "none",
-        transition: "background-color 0.3s ease",
-        boxShadow: "none",
-        paddingX: 2,
-        paddingTop: 3,
-      }}
+      className={`transition-colors duration-300 ease-in-out ${
+        navBackground
+          ? "bg-black bg-opacity-80 backdrop-blur"
+          : "bg-transparent"
+      } shadow-none px-4 py-6`}
     >
-      <Toolbar sx={{ justifyContent: "space-between" }}>
-        {/* Logo / Brand Name */}
+      <Toolbar className="justify-between">
         <Typography
           variant="h6"
           component="div"
-          sx={{ fontWeight: "bold", color: "white" }}
+          className="font-bold text-black"
         >
-          SNAELAND
+          Dreamland
         </Typography>
 
-        {/* Navigation Links */}
-        <Box sx={{ display: "flex", gap: "20px" }}>
-          {/* Explore Button with Hover Dropdown */}
-          <Box
-            onMouseEnter={showDropdown}
-            onMouseLeave={hideDropdown}
-            sx={{ position: "relative" }}
-          >
+        <Box className="flex gap-5">
+          <div className="hidden sm:block relative">
             <Button
               variant="contained"
-              sx={{
-                backgroundColor: "white",
-                color: "black",
-                padding: "0.5rem 1.5rem",
-                borderRadius: 4,
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.8)",
-                },
-              }}
-              startIcon={<ExploreIcon />} // Icon for Explore
+              className="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-80"
+              startIcon={<ExploreIcon />}
+              onMouseEnter={showDropdown}
+              onMouseLeave={hideDropdown}
             >
               Explore
             </Button>
 
-            {/* Dropdown Menu */}
             {isDropdownVisible && (
               <Box
-                onMouseEnter={showDropdown} // Ensure the dropdown stays open when hovering over it
-                onMouseLeave={hideDropdown} // Hide when mouse leaves dropdown
-                sx={{
-                  position: "absolute",
-                  top: "110%", // Position dropdown just below the button
-                  right: 5, // Align to the left
-                  backgroundColor: "white",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  borderRadius: "4px",
-                  zIndex: 1,
-                  height: "15vh",
-                  opacity: isDropdownVisible ? 1 : 0,
-                  transform: isDropdownVisible
-                    ? "translateY(0)"
-                    : "translateY(-10px)",
-                  visibility: isDropdownVisible ? "visible" : "hidden",
-                  transition:
-                    "opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease",
-                }}
+                onMouseEnter={showDropdown}
+                onMouseLeave={hideDropdown}
+                className="absolute top-full right-0 mt-2 bg-black shadow-md rounded-md z-10 w-48 opacity-100 transform translate-y-0 visible transition-all duration-300 ease-in-out"
               >
                 <MenuItem onClick={() => handleRedirect("/nearby-trails")}>
-                  <p className="text-black pt-2">Nearby trails</p>
+                  <p className="text-white pt-2">Nearby trails</p>
                 </MenuItem>
                 <MenuItem onClick={() => handleRedirect("/all-trails")}>
-                  <p className="text-black pt-2">All Trails</p>
+                  <p className="text-white pt-2">All Trails</p>
                 </MenuItem>
                 <MenuItem
                   onClick={() => handleRedirect("/national-park-guides")}
                 >
-                  <p className="text-black pt-2">National park guides</p>
+                  <p className="text-white pt-2">National park guides</p>
                 </MenuItem>
               </Box>
             )}
-          </Box>
+          </div>
 
-          {/* Login and Sign Up Buttons */}
-          {isLoggedIn ? (
-            <Box sx={{ display: "flex", gap: "20px" }}>
-              <Button
-                onClick={() => handleRedirect("/login")}
-                variant="contained"
-                sx={{
-                  backgroundColor: "white",
-                  color: "black",
-                  padding: "0.5rem 1.5rem",
-                  borderRadius: 4,
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.8)",
-                  },
-                }}
-              >
-                Login
-              </Button>
+          <div className="hidden sm:flex gap-5">
+            {isLoggedIn ? (
+              <>
+                <Button
+                  onClick={() => handleRedirect("/login")}
+                  variant="contained"
+                  className="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-80"
+                >
+                  Login
+                </Button>
+                <Button
+                  onClick={() => handleRedirect("/register")}
+                  variant="contained"
+                  className="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-80"
+                >
+                  Sign Up
+                </Button>
+              </>
+            ) : (
+              <Typography className="text-white">HI</Typography>
+            )}
+          </div>
 
-              <Button
-                onClick={() => handleRedirect("/register")}
-                variant="contained"
-                sx={{
-                  backgroundColor: "white",
-                  color: "black",
-                  padding: "0.5rem 1.5rem",
-                  borderRadius: 4,
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.8)",
-                  },
-                }}
-              >
-                Sign Up
-              </Button>
-            </Box>
-          ) : (
-            <Typography sx={{ color: "white" }}>HI</Typography>
-          )}
+          <Button className="sm:hidden" onClick={toggleDropdown}>
+            <MenuIcon />
+          </Button>
         </Box>
       </Toolbar>
+
+      {isDropdownVisible && (
+        <Box className="sm:hidden bg-black p-4">
+          <MenuItem onClick={() => handleRedirect("/nearby-trails")}>
+            <Typography className="text-white">All Trails</Typography>
+          </MenuItem>
+          <MenuItem onClick={() => handleRedirect("/all-trails")}>
+            <Typography className="text-white">Nearby Trails</Typography>
+          </MenuItem>
+          <MenuItem onClick={() => handleRedirect("/national-park-guides")}>
+            <Typography className="text-white">National park guides</Typography>
+          </MenuItem>
+          {isLoggedIn ? (
+            <>
+              <MenuItem onClick={() => handleRedirect("/login")}>
+                <Typography className="text-white">Login</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => handleRedirect("/register")}>
+                <Typography className="text-white">Sign Up</Typography>
+              </MenuItem>
+            </>
+          ) : (
+            <MenuItem>
+              <Typography className="text-white">HI</Typography>
+            </MenuItem>
+          )}
+        </Box>
+      )}
     </AppBar>
   );
 };

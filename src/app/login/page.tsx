@@ -1,12 +1,40 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 import { TextField, Button } from "@mui/material";
 import Link from "next/link";
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
+import { useSetRecoilState } from "recoil";
+import { userAtom } from "../../Store/Atoms/userAtom"; // Assuming you have a userAtom atom
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const setUser = useSetRecoilState(userAtom);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:9000/api/v1/users/login", {
+        email: email,
+        password: password,
+      });
+      localStorage.setItem("accessToken", res.data.token);
+      setUser(res.data.user); // Update Recoil state with user data
+
+      toast.success("Welcome Aboard!!!");
+      toast.success("Let's Explore!!!");
+      router.push("/all-trails");
+    } catch (error) {
+      console.error(error);
+      toast.error("Login failed. Please check your credentials.");
+    }
+  };
+
   return (
     <div className="relative h-screen">
       {/* Background Image */}
@@ -26,13 +54,18 @@ const LoginPage = () => {
       {/* Login Form */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
         <h1 className="text-4xl font-bold mb-6">Login to Your Account</h1>
-        <form className="flex flex-col space-y-4 w-full max-w-md">
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col space-y-4 w-full max-w-md"
+        >
           {/* Email Field */}
           <TextField
             label="Email"
             variant="outlined"
             fullWidth
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             InputProps={{
               style: { color: "white" },
             }}
@@ -52,6 +85,8 @@ const LoginPage = () => {
             variant="outlined"
             fullWidth
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             InputProps={{
               style: { color: "white" },
             }}
@@ -63,6 +98,14 @@ const LoginPage = () => {
               borderRadius: 1,
             }}
           />
+
+          {/* Forgot Password Link */}
+          <Link
+            href="/forgot-password"
+            className="text-blue-500 text-sm self-start"
+          >
+            Forgot Password?
+          </Link>
 
           {/* Login Button */}
           <Button
@@ -82,14 +125,17 @@ const LoginPage = () => {
           >
             Login
           </Button>
+
           <div className="flex text-xl">
-            <p>Do not have an account?</p>
+            <p>Don&apos;t have an account?</p>
             <Link href="/register" className="ml-2 text-blue-500 underline">
               Register
             </Link>
           </div>
         </form>
       </div>
+
+      <Toaster />
     </div>
   );
 };

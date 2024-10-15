@@ -6,7 +6,6 @@ import Trails from "../../src/app/(components)/Trails/page";
 import Share from "../../src/app/(components)/Share/page";
 
 const page = () => {
-  console.log("page");
   return (
     <div>
       <Banner />

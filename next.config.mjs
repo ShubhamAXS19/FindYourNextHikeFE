@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    images: {
+        domains: [
+            'find-your-next-hike.s3.ap-south-1.amazonaws.com/',
+            'find-your-next-tour.s3.ap-south-1.amazonaws.com/' // Add this line if it's a different bucket
+        ],
+    },
     webpack(config) {
         config.module.rules.push({
             test: /\.(mp4|webm|ogg|swf|ogv)$/, // Add video file formats here
@@ -18,4 +24,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-

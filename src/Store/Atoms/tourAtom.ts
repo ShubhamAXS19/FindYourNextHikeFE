@@ -6,25 +6,6 @@ export const allTourAtom = atom<ITour[]>({
   default: [],
 });
 
-// // Define a selector to fetch the tour data
-// export const allTourSelector = selector({
-//   key: "allTourSelector",
-//   get: async ({ get }) => {
-//     const currentTours = get(allTourAtom);
-//     if (currentTours.length > 0) {
-//       return currentTours;
-//     }
-
-//     try {
-//       const response = await axios.get("http://localhost:5000/api/v1/tours");
-//       return response.data.data.data;
-//     } catch (error) {
-//       console.error("Error fetching tours:", error);
-//       throw error;
-//     }
-//   },
-// });
-
 export const tourDetailAtom = atom({
   key: "tourDetailAtom",
   default: selector({

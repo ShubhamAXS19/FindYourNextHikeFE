@@ -15,6 +15,9 @@ import ExploreIcon from "@mui/icons-material/Explore"; // Import an icon for the
 const Header = () => {
   const [navBackground, setNavBackground] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false); // State to manage dropdown visibility
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  ); // Timeout state
   const isLoggedIn = true;
   const router = useRouter();
 
@@ -38,6 +41,20 @@ const Header = () => {
   // Handle redirect to different pages
   const handleRedirect = (path: string) => {
     router.push(path);
+  };
+
+  // Show dropdown
+  const showDropdown = () => {
+    if (dropdownTimeout) clearTimeout(dropdownTimeout); // Clear any existing timeout to prevent hiding
+    setDropdownVisible(true);
+  };
+
+  // Hide dropdown with a delay
+  const hideDropdown = () => {
+    const timeout = setTimeout(() => {
+      setDropdownVisible(false);
+    }, 200); // Add delay of 200ms before hiding dropdown
+    setDropdownTimeout(timeout);
   };
 
   return (
@@ -66,8 +83,8 @@ const Header = () => {
         <Box sx={{ display: "flex", gap: "20px" }}>
           {/* Explore Button with Hover Dropdown */}
           <Box
-            onMouseEnter={() => setDropdownVisible(true)}
-            onMouseLeave={() => setDropdownVisible(false)}
+            onMouseEnter={showDropdown}
+            onMouseLeave={hideDropdown}
             sx={{ position: "relative" }}
           >
             <Button
@@ -90,6 +107,8 @@ const Header = () => {
             {/* Dropdown Menu */}
             {isDropdownVisible && (
               <Box
+                onMouseEnter={showDropdown} // Ensure the dropdown stays open when hovering over it
+                onMouseLeave={hideDropdown} // Hide when mouse leaves dropdown
                 sx={{
                   position: "absolute",
                   top: "110%", // Position dropdown just below the button
@@ -99,13 +118,20 @@ const Header = () => {
                   borderRadius: "4px",
                   zIndex: 1,
                   height: "15vh",
+                  opacity: isDropdownVisible ? 1 : 0,
+                  transform: isDropdownVisible
+                    ? "translateY(0)"
+                    : "translateY(-10px)",
+                  visibility: isDropdownVisible ? "visible" : "hidden",
+                  transition:
+                    "opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease",
                 }}
               >
                 <MenuItem onClick={() => handleRedirect("/nearby-trails")}>
                   <p className="text-black pt-2">Nearby trails</p>
                 </MenuItem>
-                <MenuItem onClick={() => handleRedirect("/community")}>
-                  <p className="text-black pt-2">Community</p>
+                <MenuItem onClick={() => handleRedirect("/all-trails")}>
+                  <p className="text-black pt-2">All Trails</p>
                 </MenuItem>
                 <MenuItem
                   onClick={() => handleRedirect("/national-park-guides")}

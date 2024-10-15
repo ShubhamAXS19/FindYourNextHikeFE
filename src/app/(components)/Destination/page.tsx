@@ -83,7 +83,7 @@ const Page = () => {
             {/* Background Video */}
             <div className="absolute inset-0 z-0 rounded-xl overflow-hidden">
               <video
-                src="/assets/antarctica.mp4"
+                src="/assets/antarctica.webm"
                 autoPlay
                 loop
                 muted

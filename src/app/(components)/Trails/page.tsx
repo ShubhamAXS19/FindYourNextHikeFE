@@ -5,21 +5,21 @@ import { FaArrowRight } from "react-icons/fa"; // Import icons
 import Image from "next/image";
 
 const activitiesGroup1 = [
-  { name: "Hiking", imageSrc: "/assets/landing.jpg" },
-  { name: "Mountain biking", imageSrc: "/assets/landing.jpg" },
-  { name: "Running", imageSrc: "/assets/landing.jpg" },
-  { name: "Dog-friendly", imageSrc: "/assets/landing.jpg" },
-  { name: "Wheelchair-friendly", imageSrc: "/assets/landing.jpg" },
-  { name: "Road biking", imageSrc: "/assets/landing.jpg" },
+  { name: "Hiking", imageSrc: "/trails/hikinh.jpg" },
+  { name: "Mountain biking", imageSrc: "/trails/Mountain-bike.jpg" },
+  { name: "Winter Camping", imageSrc: "/trails/winter-camping.jpg" },
+  { name: "Dog-friendly", imageSrc: "/trails/Dog-Hike.jpg" },
+  { name: "Rock Climbing", imageSrc: "/trails/rock-climb.jpg" },
+  { name: "Surfing", imageSrc: "/trails/surf.jpg" },
 ];
 
 const activitiesGroup2 = [
-  { name: "Backpacking", imageSrc: "/assets/landing.jpg" },
-  { name: "Walking", imageSrc: "/assets/landing.jpg" },
-  { name: "Stroller-friendly", imageSrc: "/assets/landing.jpg" },
-  { name: "Camping", imageSrc: "/assets/landing.jpg" },
-  { name: "Scenic driving", imageSrc: "/assets/landing.jpg" },
-  { name: "Kid-friendly", imageSrc: "/assets/landing.jpg" },
+  { name: "Back Packing", imageSrc: "/trails/backpacking.jpg" },
+  { name: "Paddle Boarding", imageSrc: "/trails/paddle-board.jpg" },
+  { name: "Off Roading", imageSrc: "/trails/off-roading.jpg" },
+  { name: "Camping", imageSrc: "/trails/camping.jpg" },
+  { name: "Scenic driving", imageSrc: "/trails/sky-dive.jpg" },
+  { name: "Skiing", imageSrc: "/trails/ski.jpg" },
 ];
 
 export default function ActivityCarousel() {
@@ -36,9 +36,9 @@ export default function ActivityCarousel() {
   const activities = currentGroup === 1 ? activitiesGroup1 : activitiesGroup2;
 
   return (
-    <div className="flex items-center justify-between w-full gap-8 h-[80vh] px-20 bg-[#f2e8cf]">
+    <div className="flex items-center justify-between w-full gap-8 h-[80vh] px-10 bg-[#f2e8cf]">
       <div className="w-2/3">
-        <div className="mt-6 flex items-center space-x-4">
+        <div className="flex items-center space-x-4">
           <button
             onClick={handlePrevious}
             className="flex items-center justify-center h-16 w-24 bg-gray-300 rounded-full hover:bg-gray-400"
@@ -49,15 +49,18 @@ export default function ActivityCarousel() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {activities.map((activity) => (
               <div key={activity.name} className="relative">
-                <Image
-                  src={activity.imageSrc}
-                  alt={activity.name}
-                  className="rounded-3xl"
-                  width={600}
-                  height={700}
-                  objectFit="cover"
-                />
-                <div className="absolute bottom-4 left-6 bg-opacity-50 text-white text-3xl font-bold p-2 rounded-b-lg">
+                <div
+                  className="w-[28vw] h-auto"
+                  style={{ aspectRatio: "16 / 9" }}
+                >
+                  <Image
+                    src={activity.imageSrc}
+                    alt={activity.name}
+                    className="rounded-3xl object-cover"
+                    fill
+                  />
+                </div>
+                <div className="absolute bottom-4 left-2 bg-opacity-50 text-white text-3xl font-bold p-2 rounded-b-lg">
                   {activity.name}
                 </div>
               </div>
@@ -73,11 +76,11 @@ export default function ActivityCarousel() {
       </div>
 
       {/* right side */}
-      <div className="flex flex-col justify-between mt-6 text-center w-1/3">
-        <h2 className="text-7xl text-left font-semibold">
+      <div className="flex flex-col justify-between items-start gap-14 text-center w-1/3">
+        <h2 className="text-6xl text-left font-semibold">
           Trails that fit your nature
         </h2>
-        <p className="text-4xl text-left text-gray-500 mt-2">
+        <p className="text-4xl text-left text-gray-500">
           Whether you are pushing your limits or pushing a stroller, we have got
           you covered.
         </p>

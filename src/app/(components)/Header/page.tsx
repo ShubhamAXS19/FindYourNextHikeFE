@@ -60,7 +60,7 @@ const Header = () => {
   return (
     <AppBar
       position="fixed"
-      className={`transition-colors duration-300 ease-in-out ${
+      className={`transition-colors duration-300 bg-white ease-in-out ${
         navBackground
           ? "bg-black bg-opacity-80 backdrop-blur"
           : "bg-transparent"

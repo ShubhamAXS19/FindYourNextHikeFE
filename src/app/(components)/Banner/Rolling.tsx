@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-const RollingImages = ({ images, staticText, changingWords }) => {
+interface RollingImagesProps {
+  images: string[];
+  staticText: string;
+  changingWords: string[];
+}
+
+const RollingImages: React.FC<RollingImagesProps> = ({
+  images,
+  staticText,
+  changingWords,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
 

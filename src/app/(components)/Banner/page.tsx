@@ -7,7 +7,8 @@ import landing2 from "../../../../public/assets/login-signup.jpg";
 import landing3 from "../../../../public/assets/landing.jpg";
 
 const LandingPage = () => {
-  const images = [landing1, landing2, landing3];
+  // Extract the `src` from each StaticImageData object
+  const images = [landing1.src, landing2.src, landing3.src];
   const staticText = "Welcome to Our";
   const changingWords = ["Wonderland", "Journey", "Adventure"];
 

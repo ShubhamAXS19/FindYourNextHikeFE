@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,28 +14,13 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
-  const [navBackground, setNavBackground] = useState(false);
+  const navBackground = true;
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
   const isLoggedIn = true;
   const router = useRouter();
-
-  const handleScroll = () => {
-    if (window.scrollY > 100) {
-      setNavBackground(true);
-    } else {
-      setNavBackground(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const handleRedirect = (path: string) => {
     router.push(path);
@@ -60,10 +45,8 @@ const Header = () => {
   return (
     <AppBar
       position="fixed"
-      className={`transition-colors duration-300 bg-white ease-in-out ${
-        navBackground
-          ? "bg-black bg-opacity-80 backdrop-blur"
-          : "bg-transparent"
+      className={`transition-colors duration-300 ease-in-out ${
+        navBackground ? "bg-white bg-opacity-80 backdrop-blur" : "bg-white"
       } shadow-none px-4 py-6`}
     >
       <Toolbar className="justify-between">

@@ -36,7 +36,7 @@ export default function ActivityCarousel() {
   const activities = currentGroup === 1 ? activitiesGroup1 : activitiesGroup2;
 
   return (
-    <div className="flex items-center justify-between w-full gap-8 h-[80vh] px-10 bg-[#f2e8cf]">
+    <div className="flex items-center justify-between w-full gap-8 h-[80vh] px-10 bg-trail">
       <div className="w-2/3">
         <div className="flex items-center space-x-4">
           <button

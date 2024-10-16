@@ -1,25 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Typography,
-  Box,
-  MenuItem,
-} from "@mui/material";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import ExploreIcon from "@mui/icons-material/Explore";
-import MenuIcon from "@mui/icons-material/Menu";
+import { MdOutlineExplore } from "react-icons/md";
 
 const Header = () => {
   const navBackground = true;
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
-  const isLoggedIn = true;
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
+  const isLoggedIn = false; // Updated to show login/signup when logged out
   const router = useRouter();
 
   const handleRedirect = (path: string) => {
@@ -27,127 +16,133 @@ const Header = () => {
   };
 
   const showDropdown = () => {
-    if (dropdownTimeout) clearTimeout(dropdownTimeout);
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownVisible(true);
   };
 
   const hideDropdown = () => {
-    const timeout = setTimeout(() => {
+    dropdownTimeout.current = setTimeout(() => {
       setDropdownVisible(false);
     }, 200);
-    setDropdownTimeout(timeout);
   };
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!isDropdownVisible);
-  };
+  // const toggleDropdown = () => {
+  //   setDropdownVisible(!isDropdownVisible);
+  // };
 
   return (
-    <AppBar
-      position="fixed"
+    <header
       className={`transition-colors duration-300 ease-in-out ${
-        navBackground ? "bg-white bg-opacity-80 backdrop-blur" : "bg-white"
-      } shadow-none px-4 py-6`}
+        navBackground ? "bg-header bg-opacity-80 backdrop-blur" : "bg-header"
+      } shadow-none px-4 py-6 fixed w-full top-0 z-30`}
     >
-      <Toolbar className="justify-between">
-        <Typography
-          variant="h6"
-          component="div"
-          className="font-bold text-black"
-        >
-          Dreamland
-        </Typography>
+      <div className="flex justify-between items-center">
+        <h1 className="font-bold text-black">Dreamland</h1>
 
-        <Box className="flex gap-5">
+        <div className="flex gap-5">
           <div className="hidden sm:block relative">
-            <Button
-              variant="contained"
-              className="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-80"
-              startIcon={<ExploreIcon />}
+            <div
+              className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-black hover:bg-opacity-80 flex items-center gap-2 text-xl"
               onMouseEnter={showDropdown}
               onMouseLeave={hideDropdown}
             >
+              <MdOutlineExplore size={20} />
               Explore
-            </Button>
+            </div>
 
             {isDropdownVisible && (
-              <Box
+              <div
                 onMouseEnter={showDropdown}
                 onMouseLeave={hideDropdown}
-                className="absolute top-full right-0 mt-2 bg-black shadow-md rounded-md z-10 w-48 opacity-100 transform translate-y-0 visible transition-all duration-300 ease-in-out"
+                className="absolute top-full right-0 mt-2 py-2 bg-black shadow-md rounded-md z-50 w-64 h-48 flex flex-col items-start justify-around opacity-100 transform translate-y-0 visible transition-all duration-300 ease-in-out"
+                style={{ zIndex: 50 }} // Set high z-index for dropdown
               >
-                <MenuItem onClick={() => handleRedirect("/nearby-trails")}>
-                  <p className="text-white pt-2">Nearby trails</p>
-                </MenuItem>
-                <MenuItem onClick={() => handleRedirect("/all-trails")}>
-                  <p className="text-white pt-2">All Trails</p>
-                </MenuItem>
-                <MenuItem
+                <div
+                  className="cursor-pointer text-white px-4 text-lg"
+                  onClick={() => handleRedirect("/nearby-trails")}
+                >
+                  All trails
+                </div>
+                <div
+                  className="cursor-pointer text-white px-4 text-lg"
+                  onClick={() => handleRedirect("/all-trails")}
+                >
+                  Nearby Trails
+                </div>
+                <div
+                  className="cursor-pointer text-white px-4 text-lg"
                   onClick={() => handleRedirect("/national-park-guides")}
                 >
-                  <p className="text-white pt-2">National park guides</p>
-                </MenuItem>
-              </Box>
+                  National park guides
+                </div>
+              </div>
             )}
           </div>
 
           <div className="hidden sm:flex gap-5">
-            {isLoggedIn ? (
+            {!isLoggedIn ? (
               <>
-                <Button
+                <button
                   onClick={() => handleRedirect("/login")}
-                  variant="contained"
-                  className="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-80"
+                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-80 text-xl"
                 >
                   Login
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={() => handleRedirect("/register")}
-                  variant="contained"
-                  className="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-80"
+                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-80 text-xl"
                 >
                   Sign Up
-                </Button>
+                </button>
               </>
             ) : (
-              <Typography className="text-white">HI</Typography>
+              <div className="text-white">HI</div>
             )}
           </div>
-
-          <Button className="sm:hidden" onClick={toggleDropdown}>
-            <MenuIcon />
-          </Button>
-        </Box>
-      </Toolbar>
+        </div>
+      </div>
 
       {isDropdownVisible && (
-        <Box className="sm:hidden bg-black p-4">
-          <MenuItem onClick={() => handleRedirect("/nearby-trails")}>
-            <Typography className="text-white">All Trails</Typography>
-          </MenuItem>
-          <MenuItem onClick={() => handleRedirect("/all-trails")}>
-            <Typography className="text-white">Nearby Trails</Typography>
-          </MenuItem>
-          <MenuItem onClick={() => handleRedirect("/national-park-guides")}>
-            <Typography className="text-white">National park guides</Typography>
-          </MenuItem>
-          {isLoggedIn ? (
+        <div className="sm:hidden bg-black p-4 z-50" style={{ zIndex: 50 }}>
+          <div
+            className="cursor-pointer text-white p-2"
+            onClick={() => handleRedirect("/nearby-trails")}
+          >
+            All Trails
+          </div>
+          <div
+            className="cursor-pointer text-white p-2"
+            onClick={() => handleRedirect("/all-trails")}
+          >
+            Nearby Trails
+          </div>
+          <div
+            className="cursor-pointer text-white p-2"
+            onClick={() => handleRedirect("/national-park-guides")}
+          >
+            National park guides
+          </div>
+          {!isLoggedIn ? (
             <>
-              <MenuItem onClick={() => handleRedirect("/login")}>
-                <Typography className="text-white">Login</Typography>
-              </MenuItem>
-              <MenuItem onClick={() => handleRedirect("/register")}>
-                <Typography className="text-white">Sign Up</Typography>
-              </MenuItem>
+              <div
+                className="cursor-pointer text-white p-2"
+                onClick={() => handleRedirect("/login")}
+              >
+                Login
+              </div>
+              <div
+                className="cursor-pointer text-white p-2"
+                onClick={() => handleRedirect("/register")}
+              >
+                Sign Up
+              </div>
             </>
           ) : (
-            <MenuItem>
-              <Typography className="text-white">HI</Typography>
-            </MenuItem>
+            <div className="text-white p-2">HI</div>
           )}
-        </Box>
+        </div>
       )}
-    </AppBar>
+    </header>
   );
 };
 

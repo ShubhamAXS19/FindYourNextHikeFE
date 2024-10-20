@@ -37,7 +37,12 @@ const Header = () => {
       } shadow-none px-4 py-6 fixed w-full top-0 z-30`}
     >
       <div className="flex justify-between items-center">
-        <h1 className="font-bold text-black">Dreamland</h1>
+        <h1
+          className="font-bold text-black text-2xl cursor-pointer"
+          onClick={() => handleRedirect("/")}
+        >
+          Dreamland
+        </h1>
 
         <div className="flex gap-5">
           <div className="hidden sm:block relative">
@@ -59,19 +64,19 @@ const Header = () => {
               >
                 <div
                   className="cursor-pointer text-white px-4 text-lg"
-                  onClick={() => handleRedirect("/nearby-trails")}
+                  onClick={() => handleRedirect("/all-trails")}
                 >
                   All trails
                 </div>
                 <div
                   className="cursor-pointer text-white px-4 text-lg"
-                  onClick={() => handleRedirect("/all-trails")}
+                  onClick={() => handleRedirect("/nearby-trails")}
                 >
                   Nearby Trails
                 </div>
                 <div
                   className="cursor-pointer text-white px-4 text-lg"
-                  onClick={() => handleRedirect("/national-park-guides")}
+                  onClick={() => handleRedirect("/national-park-")}
                 >
                   National park guides
                 </div>
@@ -84,13 +89,13 @@ const Header = () => {
               <>
                 <button
                   onClick={() => handleRedirect("/login")}
-                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-80 text-xl"
+                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-black hover:bg-opacity-80 text-xl"
                 >
                   Login
                 </button>
                 <button
                   onClick={() => handleRedirect("/register")}
-                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-80 text-xl"
+                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-black hover:bg-opacity-80 text-xl"
                 >
                   Sign Up
                 </button>

@@ -19,10 +19,13 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:9000/api/v1/users/login", {
-        email: email,
-        password: password,
-      });
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
       localStorage.setItem("accessToken", res.data.token);
       setUser(res.data.user); // Update Recoil state with user data
 

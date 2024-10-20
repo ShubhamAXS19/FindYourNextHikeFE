@@ -23,7 +23,7 @@ const TourDetailPage = ({ params }: { params: Params }) => {
     const fetchTourDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9000/api/v1/tours/${decodedTitle}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/tours/${decodedTitle}`
         );
         setTourDetail(response.data.data.tour);
       } catch (error) {

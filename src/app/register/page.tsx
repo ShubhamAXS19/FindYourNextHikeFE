@@ -28,7 +28,7 @@ const RegisterPage = () => {
     localStorage.setItem("userID", userID);
     toast.promise(
       axios.post(
-        `http://localhost:9000/api/v1/users/verifyEmail/${userID}/${verificationCode}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/verifyEmail/${userID}/${verificationCode}`,
         {
           id: userID,
           verificationCode: verificationCode,
@@ -63,7 +63,7 @@ const RegisterPage = () => {
     e.preventDefault();
     toast.promise(
       axios.post(
-        "http://localhost:9000/api/v1/users/signup",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/signup`,
         {
           name: fullName,
           password,

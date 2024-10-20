@@ -13,7 +13,7 @@ const LandingPage = () => {
   const changingWords = ["Wonderland", "Journey", "Adventure"];
 
   return (
-    <div className="flex justify-center items-center h-[90vh] p-4">
+    <div className="flex justify-center items-center h-[90vh] p-4 mt-10">
       <RollingImages
         images={images}
         staticText={staticText}

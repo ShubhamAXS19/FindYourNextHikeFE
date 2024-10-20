@@ -15,7 +15,9 @@ const ToursList = () => {
     const fetchTours = async () => {
       if (tours.length === 0) {
         try {
-          const res = await axios.get("http://localhost:9000/api/v1/tours");
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/tours/`
+          );
           const data = res.data.data.data;
           console.log(data);
           setTours(data);

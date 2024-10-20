@@ -87,6 +87,8 @@ const TourCard: React.FC<TourProps> = ({ tour }) => {
           </div>
         </div>
 
+        <div></div>
+
         <div className=" bg-blue-500 text-white py-2 px-4 mt-2 rounded-md font-medium">
           <Link href={`/tour/${tour.name}`} className="flex items-center gap-1">
             <p>More Detail </p>

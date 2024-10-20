@@ -6,7 +6,7 @@ import { ArrowRightAlt } from "@mui/icons-material"; // Import ArrowRightAlt ico
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative flex flex-col ">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -22,7 +22,7 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-black opacity-30 z-5"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center text-center pt-16 px-4 sm:px-8 md:px-12 lg:px-24">
+      <div className="relative z-10 flex-grow flex flex-col justify-center items-center text-center pt-16 px-4 sm:px-8 md:px-12 lg:px-24 ">
         {/* Headline */}
         <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight">
           Find the perfect trip for you and discover extraordinary adventures
@@ -30,14 +30,14 @@ export default function HomePage() {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-white mt-4 text-lg sm:text-xl max-w-3xl">
+        <p className="text-white my-8 text-lg sm:text-xl max-w-3xl">
           Embark on a journey of exploration and excitement as we guide you
           towards unforgettable experiences across the globe.
         </p>
 
         {/* Get Started Button */}
         <Link href="#">
-          <button className="mt-8 bg-white text-black px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-opacity-90">
+          <button className="my-8 bg-white text-black px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-opacity-90">
             <span>Get Started</span>
             <ArrowRightAlt />
           </button>

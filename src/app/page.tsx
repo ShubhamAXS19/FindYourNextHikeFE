@@ -10,9 +10,9 @@ const page = () => {
     <div>
       <Banner />
       <Trails />
+      <Destination />
       <AboutUs />
       <Share />
-      <Destination />
     </div>
   );
 };

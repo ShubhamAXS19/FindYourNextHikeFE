@@ -16,10 +16,10 @@ const ToursList = () => {
       if (tours.length === 0) {
         try {
           const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/tours/`
+            `${process.env.NEXT_PUBLIC_API_URL}/tours/`
           );
           const data = res.data.data.data;
-          console.log(process.env.NEXT_PUBLIC_BASE_URL);
+          console.log(process.env.NEXT_PUBLIC_API_URL);
           setTours(data);
         } catch (error) {
           console.error("Error fetching tours:", error);

@@ -16,7 +16,11 @@ const ToursList = () => {
       if (tours.length === 0) {
         try {
           const res = await axios.get(
+<<<<<<< HEAD
           `${process.env.NEXT_PUBLIC_API_URL}/tours/`
+=======
+            `${process.env.NEXT_PUBLIC_API_URL}/tours/`
+>>>>>>> 8cba73c586d1ab2685b39e66a681e73016df8cfe
           );
           // const res = await axios.get(
           //   "https://vu2gsx77o6.execute-api.ap-south-1.amazonaws.com/prod/api/v1/tours"

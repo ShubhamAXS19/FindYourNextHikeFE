@@ -5,26 +5,43 @@ import { FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { GrLinkedinOption } from "react-icons/gr";
 import Image from "next/image";
+
 interface AdventureCardProps {
   imageSrc: string;
   username: string;
 }
+
 const AdventureCard: React.FC<AdventureCardProps> = ({
   imageSrc,
   username,
 }) => (
-  <div className="relative rounded-lg overflow-hidden">
+  <div className="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
     <Image
       src={imageSrc}
       alt={`Adventure by ${username}`}
-      width={400}
-      height={200}
-      className="w-full h-48 object-cover"
+      width={600}
+      height={600}
+      className="w-full sm:h-40 md:h-48 lg:h-54 xl:h-60 object-cover"
     />
-    <div className="absolute bottom-2 left-2 text-white text-sm font-semibold">
+    <div className="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black bg-opacity-30 px-2 py-1 rounded">
       @{username}
     </div>
   </div>
+);
+
+const SocialIcon = ({
+  Icon,
+  label,
+}: {
+  Icon: React.ElementType;
+  label: string;
+}) => (
+  <button
+    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors duration-200 border border-gray-200"
+    aria-label={label}
+  >
+    <Icon size={20} className="text-gray-600 hover:text-green-700" />
+  </button>
 );
 
 const AdventureSharingComponent = () => {
@@ -42,27 +59,33 @@ const AdventureSharingComponent = () => {
       username: "anastasias.true",
     },
   ];
-
+  const socialIcons = [
+    { Icon: GrInstagram, label: "Instagram" },
+    { Icon: FaTiktok, label: "TikTok" },
+    { Icon: FaFacebookF, label: "Facebook" },
+    { Icon: FaXTwitter, label: "X" },
+    { Icon: GrLinkedinOption, label: "LinkedIn" },
+  ];
   return (
-    <div className="w-full">
-      <div className="w-[70vw] mx-auto p-4">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-4xl font-bold text-green-900">
+    <div className="w-full bg-white">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-900">
             Share your next adventure
           </h1>
-          <div className="flex space-x-2">
-            <GrInstagram size={24} />
-            <FaTiktok size={24} />
-            <FaFacebookF size={24} />
-            <FaXTwitter size={24} />
-            <GrLinkedinOption size={24} />
+          <div className="flex flex-wrap gap-3">
+            {socialIcons.map(({ Icon, label }) => (
+              <SocialIcon key={label} Icon={Icon} label={label} />
+            ))}
           </div>
         </div>
-        <p className="text-lg mb-6">
+
+        <p className="text-base sm:text-lg mb-8 text-gray-700">
           Show us how you #GetOutThere by tagging us @AllTrails for a chance to
           be featured!
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {adventures.map((adventure) => (
             <AdventureCard
               key={adventure.id}
@@ -70,10 +93,6 @@ const AdventureSharingComponent = () => {
               username={adventure.username}
             />
           ))}
-        </div>
-        <div className="flex justify-between mt-4">
-          <button className="text-gray-500 hover:text-gray-700">&lt;</button>
-          <button className="text-gray-500 hover:text-gray-700">&gt;</button>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ const Header = () => {
   const navBackground = true;
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
-  const isLoggedIn = false; // Updated to show login/signup when logged out
+  const isLoggedIn = false; // Simulating logged-out state for login/signup buttons
   const router = useRouter();
 
   const handleRedirect = (path: string) => {
@@ -26,28 +26,25 @@ const Header = () => {
     }, 200);
   };
 
-  // const toggleDropdown = () => {
-  //   setDropdownVisible(!isDropdownVisible);
-  // };
-
   return (
     <header
       className={`transition-colors duration-300 ease-in-out ${
         navBackground ? "bg-header bg-opacity-80 backdrop-blur" : "bg-header"
-      } shadow-none px-4 py-6 fixed w-full top-0 z-30`}
+      } shadow-none px-4 py-4 fixed w-full top-0 z-30`}
     >
       <div className="flex justify-between items-center">
         <h1
-          className="font-bold text-black text-2xl cursor-pointer"
+          className="font-bold text-black text-xl sm:text-2xl cursor-pointer"
           onClick={() => handleRedirect("/")}
         >
           Dreamland
         </h1>
 
-        <div className="flex gap-5">
-          <div className="hidden sm:block relative">
+        {/* Desktop Navigation */}
+        <div className="hidden sm:flex gap-5">
+          <div className="relative">
             <div
-              className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-black hover:bg-opacity-80 flex items-center gap-2 text-xl"
+              className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-80 flex items-center gap-2 sm-text-sm md:text-base lg:text-lg xl:text-2xl cursor-pointer transition-colors duration-200"
               onMouseEnter={showDropdown}
               onMouseLeave={hideDropdown}
             >
@@ -59,94 +56,104 @@ const Header = () => {
               <div
                 onMouseEnter={showDropdown}
                 onMouseLeave={hideDropdown}
-                className="absolute top-full right-0 mt-2 py-2 bg-black shadow-md rounded-md z-50 w-64 h-48 flex flex-col items-start justify-around opacity-100 transform translate-y-0 visible transition-all duration-300 ease-in-out"
-                style={{ zIndex: 50 }} // Set high z-index for dropdown
+                className="absolute top-full right-0 mt-2 py-2 bg-black shadow-md rounded-md z-50 w-48 sm:w-64 flex flex-col items-start justify-around transition-opacity duration-300 ease-in-out"
               >
                 <div
-                  className="cursor-pointer text-white px-4 text-lg"
+                  className="cursor-pointer text-white px-4 py-2 text-base sm:text-lg hover:bg-gray-800 w-full"
                   onClick={() => handleRedirect("/all-trails")}
                 >
-                  All trails
+                  All Trails
                 </div>
                 <div
-                  className="cursor-pointer text-white px-4 text-lg"
+                  className="cursor-pointer text-white px-4 py-2 text-base sm:text-lg hover:bg-gray-800 w-full"
                   onClick={() => handleRedirect("/nearby-trails")}
                 >
                   Nearby Trails
                 </div>
                 <div
-                  className="cursor-pointer text-white px-4 text-lg"
-                  onClick={() => handleRedirect("/national-park-")}
+                  className="cursor-pointer text-white px-4 py-2 text-base sm:text-lg hover:bg-gray-800 w-full"
+                  onClick={() => handleRedirect("/national-park-guides")}
                 >
-                  National park guides
+                  National Park Guides
                 </div>
               </div>
             )}
           </div>
 
-          <div className="hidden sm:flex gap-5">
-            {!isLoggedIn ? (
-              <>
-                <button
-                  onClick={() => handleRedirect("/login")}
-                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-black hover:bg-opacity-80 text-xl"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => handleRedirect("/register")}
-                  className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-black hover:bg-opacity-80 text-xl"
-                >
-                  Sign Up
-                </button>
-              </>
-            ) : (
-              <div className="text-white">HI</div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {isDropdownVisible && (
-        <div className="sm:hidden bg-black p-4 z-50" style={{ zIndex: 50 }}>
-          <div
-            className="cursor-pointer text-white p-2"
-            onClick={() => handleRedirect("/nearby-trails")}
-          >
-            All Trails
-          </div>
-          <div
-            className="cursor-pointer text-white p-2"
-            onClick={() => handleRedirect("/all-trails")}
-          >
-            Nearby Trails
-          </div>
-          <div
-            className="cursor-pointer text-white p-2"
-            onClick={() => handleRedirect("/national-park-guides")}
-          >
-            National park guides
-          </div>
+          {/* Login/Signup buttons for large screens */}
           {!isLoggedIn ? (
-            <>
-              <div
-                className="cursor-pointer text-white p-2"
+            <div className="flex gap-4">
+              <button
                 onClick={() => handleRedirect("/login")}
+                className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg xl:text-2xl transition-transform duration-200 transform hover:scale-105"
               >
                 Login
-              </div>
-              <div
-                className="cursor-pointer text-white p-2"
+              </button>
+              <button
                 onClick={() => handleRedirect("/register")}
+                className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg xl:text-2xl transition-transform duration-200 transform hover:scale-105"
               >
                 Sign Up
-              </div>
-            </>
+              </button>
+            </div>
           ) : (
-            <div className="text-white p-2">HI</div>
+            <div className="text-white text-lg sm:text-xl">Hi, User</div>
           )}
         </div>
-      )}
+
+        {/* Mobile Navigation */}
+        <div className="sm:hidden flex items-center">
+          <button
+            className="bg-black text-white px-4 py-2 rounded-md text-lg"
+            onClick={showDropdown}
+          >
+            <MdOutlineExplore size={24} />
+          </button>
+
+          {isDropdownVisible && (
+            <div className="absolute top-16 left-0 w-full bg-black p-4 z-50 flex flex-col gap-2">
+              <div
+                className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full"
+                onClick={() => handleRedirect("/all-trails")}
+              >
+                All Trails
+              </div>
+              <div
+                className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full"
+                onClick={() => handleRedirect("/nearby-trails")}
+              >
+                Nearby Trails
+              </div>
+              <div
+                className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full"
+                onClick={() => handleRedirect("/national-park-guides")}
+              >
+                National Park Guides
+              </div>
+              {!isLoggedIn ? (
+                <>
+                  <div
+                    className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full"
+                    onClick={() => handleRedirect("/login")}
+                  >
+                    Login
+                  </div>
+                  <div
+                    className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full"
+                    onClick={() => handleRedirect("/register")}
+                  >
+                    Sign Up
+                  </div>
+                </>
+              ) : (
+                <div className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full">
+                  Hi, User
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
     </header>
   );
 };

@@ -16,13 +16,10 @@ const ToursList = () => {
       if (tours.length === 0) {
         try {
           const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/tours/`
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/tours/`
           );
-          // const res = await axios.get(
-          //   "https://vu2gsx77o6.execute-api.ap-south-1.amazonaws.com/prod/api/v1/tours"
-          // );
           const data = res.data.data.data;
-          console.log(process.env.NEXT_PUBLIC_API_URL);
+          console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
           setTours(data);
         } catch (error) {
           console.error("Error fetching tours:", error);

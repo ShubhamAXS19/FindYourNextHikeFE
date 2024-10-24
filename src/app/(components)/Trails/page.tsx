@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { FaArrowLeft } from "react-icons/fa6"; // Import icons
-import { FaArrowRight } from "react-icons/fa"; // Import icons
+import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
 
 const activitiesGroup1 = [
@@ -36,55 +36,53 @@ export default function ActivityCarousel() {
   const activities = currentGroup === 1 ? activitiesGroup1 : activitiesGroup2;
 
   return (
-    <div className="flex items-center justify-between w-full gap-8 h-[80vh] px-10 bg-trail">
-      <div className="w-2/3">
-        <div className="flex items-center space-x-4">
+    <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:h-[80vh] p-4 lg:px-10 bg-trail">
+      <div className="w-full lg:w-2/3">
+        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
           <button
             onClick={handlePrevious}
-            className="flex items-center justify-center h-16 w-24 bg-gray-300 rounded-full hover:bg-gray-400"
+            className="flex items-center justify-center h-12 w-12 md:h-16 md:w-24 bg-gray-300 rounded-full hover:bg-gray-400"
           >
-            <FaArrowLeft size={40} />
+            <FaArrowLeft className="h-6 w-6 md:h-8 md:w-8" size={40} />
           </button>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             {activities.map((activity) => (
-              <div key={activity.name} className="relative">
-                <div
-                  className="w-[28vw] h-auto"
-                  style={{ aspectRatio: "16 / 9" }}
-                >
+              <div key={activity.name} className="relative w-full">
+                <div className="relative w-full" style={{ paddingTop: "90%" }}>
                   <Image
                     src={activity.imageSrc}
                     alt={activity.name}
-                    className="rounded-3xl object-cover "
+                    className="rounded-3xl object-cover"
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
-                <div className="absolute bottom-4 left-2 bg-opacity-50 text-white text-3xl font-bold p-2 rounded-b-lg">
+                <div className="absolute bottom-4 left-2 bg-opacity-50 text-white sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold p-2 rounded-b-lg">
                   {activity.name}
                 </div>
               </div>
             ))}
           </div>
+
           <button
             onClick={handleNext}
-            className="flex items-center justify-center h-16 w-24 bg-gray-300 rounded-full hover:bg-gray-400"
+            className="flex items-center justify-center h-12 w-12 md:h-16 md:w-24 bg-gray-300 rounded-full hover:bg-gray-400"
           >
-            <FaArrowRight size={40} />
+            <FaArrowRight className="h-6 w-6 md:h-8 md:w-8" size={40} />
           </button>
         </div>
       </div>
 
-      {/* right side */}
-      <div className="flex flex-col justify-between items-start gap-14 text-center w-1/3">
-        <h2 className="text-6xl text-left font-semibold">
+      <div className="flex flex-col justify-between items-start gap-6 lg:gap-14 text-center w-full lg:w-1/3 mt-8 lg:mt-0">
+        <h2 className="sm:text-lg md:text-xl lg:text-3xl xl:text-5xl text-left font-semibold">
           Trails that fit your nature
         </h2>
-        <p className="text-4xl text-left text-gray-500">
+        <p className="sm:text-base md:text-lg lg:text-2xl xl:text-4xl text-left text-gray-500">
           Whether you are pushing your limits or pushing a stroller, we have got
           you covered.
         </p>
-        <button className="px-6 py-2 bg-green-600 text-white text-3xl rounded-full hover:bg-green-700">
+        <button className="px-6 py-2 bg-green-600 text-white sm:text-base md:text-base lg:text-xl xl:text-3xl rounded-full hover:bg-green-700">
           Sign up
         </button>
       </div>

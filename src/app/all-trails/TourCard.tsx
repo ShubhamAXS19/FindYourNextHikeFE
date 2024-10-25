@@ -46,9 +46,14 @@ const TourCard: React.FC<TourProps> = ({ tour }) => {
       </div>
       {/* content */}
       <div className="flex flex-col items-left p-4 ">
-        <h2 className="text-2xl underline font-bold">{tour.name}</h2>
-        <p className="text-gray-500">
-          Start Location : {tour.startLocation?.address}
+        <h2 className="sm:text-base md:text-lg lg:text-xl xl:text-4xl underline font-bold">
+          {tour.name}
+        </h2>
+        <p className="text-gray-500 sm:text-sm md:text-base lg:text-lg xl:text-3xl">
+          Start Location:
+          {tour.startLocation?.address.length > 30
+            ? `${tour.startLocation.address.slice(0, 30)}...`
+            : tour.startLocation?.address}
         </p>
         <div className="flex items-center mt-2 justify-start gap-3">
           <span className="bg-[#F7B538] py-2 px-4 rounded-md font-medium">

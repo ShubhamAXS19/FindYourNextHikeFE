@@ -126,7 +126,7 @@ const Header = () => {
               </div>
               <div
                 className="cursor-pointer text-white p-2 text-base hover:bg-gray-800 w-full"
-                onClick={() => handleRedirect("/national-park-guides")}
+                onClick={() => handleRedirect("/national-park")}
               >
                 National Park Guides
               </div>

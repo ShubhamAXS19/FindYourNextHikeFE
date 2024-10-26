@@ -51,9 +51,9 @@ const TourCard: React.FC<TourProps> = ({ tour }) => {
         </h2>
         <p className="text-gray-500 sm:text-sm md:text-base lg:text-lg xl:text-3xl">
           Start Location:
-          {tour.startLocation?.address.length > 30
+          {tour.startLocation?.address && tour.startLocation.address.length > 30
             ? `${tour.startLocation.address.slice(0, 30)}...`
-            : tour.startLocation?.address}
+            : tour.startLocation?.address || "Address not available"}
         </p>
         <div className="flex items-center mt-2 justify-start gap-3">
           <span className="bg-[#F7B538] py-2 px-4 rounded-md font-medium">

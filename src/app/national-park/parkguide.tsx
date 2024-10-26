@@ -219,7 +219,7 @@ const CardImage = styled.img`
   object-fit: cover;
 `;
 
-const CardContent = styled.div`
+const CardContent = styled.div<{ bgColor: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
